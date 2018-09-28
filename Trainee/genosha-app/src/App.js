@@ -23,6 +23,8 @@ class App extends Component {
           {this.state.users.map(user =>
             <div className="Users" key={user.id}>{user.username}</div>
           )}
+
+          <div className="Variable"> <p>{process.env.REACT_APP_ENV}</p> </div>
       </div>
     );
   }
