@@ -1,0 +1,60 @@
+{
+  "apps": [
+    {
+      "name": "mi-app",
+      "script": "server.js",
+      "env_development": {
+        "PORT": 3000,
+        "NODE_ENV": "development",
+        "STAGE": "development"
+      },
+      "env_staging": {
+        "PORT": 3000,
+        "NODE_ENV": "staging",
+        "STAGE": "staging"
+      },
+      "env_production": {
+        "PORT": 3000,
+        "NODE_ENV": "production",
+        "STAGE": "production"
+      },
+      "env_local": {
+        "PORT": 8080,
+        "NODE_ENV": "local",
+        "STAGE": "local"
+      }
+    }
+  ],
+  "deploy": {
+    "development": {
+      "user": "ubuntu",
+      "host": "ec2-54-70-127-103.us-west-2.compute.amazonaws.com",
+      "key": "~/.ssh/macbook-pro.pem",
+      "ref": "origin/development",
+      "repo": "git@github.com:dantejf88/mi-app.git",
+      "path": "/home/ubuntu/mi-app",
+      "pre-deploy-local": "sh pre-deploy-local-development.sh",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env development && rm ./ecosystem.json"
+    },
+    "staging": {
+      "user": "ubuntu",
+      "host": "ec2-54-70-127-103.us-west-2.compute.amazonaws.com",
+      "key": "~/.ssh/macbook-pro.pem",
+      "ref": "origin/development",
+      "repo": "git@github.com:dantejf88/mi-app.git",
+      "path": "/home/ubuntu/mi-app",
+      "pre-deploy-local": "sh pre-deploy-local-staging.sh",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env staging && rm ./ecosystem.json"
+    },
+    "production": {
+      "user": "ubuntu",
+      "host": "ec2-54-70-127-103.us-west-2.compute.amazonaws.com",
+      "key": "/c/Users/Dante/.ssh/macbook-pro.pem",
+      "ref": "origin/master",
+      "repo": "git@github.com:dantejf88/mi-app.git",
+      "path": "/home/ubuntu/mi-app",
+      "pre-deploy-local": "sh pre-deploy-local-production.sh",
+      "post-deploy": "npm install && pm2 startOrRestart ecosystem.json --env production && rm ./ecosystem.json"
+    }
+  }
+}

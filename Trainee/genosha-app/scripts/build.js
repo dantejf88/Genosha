@@ -3,7 +3,14 @@
 // Do this as the first thing so that any code reading it knows the right env.
 process.env.BABEL_ENV = 'production';
 process.env.NODE_ENV = 'production';
+// process.env.NODE_ENV = process.env.NODE_ENV || "production";
+process.env.REACT_APP_ENV=process.env.REACT_APP_ENV || "PRODUCTION"
 
+// if (process.env.NODE_ENV === 'staging') {
+//     const config = require('../config/webpack.config.staging')
+// } else {
+//   const config = require('../config/webpack.config.prod');
+// }
 
 // Makes the script crash on unhandled rejections instead of silently
 // ignoring them. In the future, promise rejections that are not handled will
